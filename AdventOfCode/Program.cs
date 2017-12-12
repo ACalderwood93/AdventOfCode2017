@@ -11,6 +11,7 @@ namespace AdventofCode
     {
         static void Main(string[] args)
         {
+
             var s_Input = @"4347	3350	196	162	233	4932	4419	3485	4509	4287	4433	4033	207	3682	2193	4223
 648 94  778 957 1634    2885    1964    2929    2754    89  972 112 80  2819    543 2820
 400 133 1010    918 1154    1008    126 150 1118    117 148 463 141 940 1101    89
@@ -44,14 +45,15 @@ namespace AdventofCode
 
                 for (int j = 0; j < numberGroups.Count; j++)
                 {
-                    for (int k = numberGroups.Count - 1; k > 0; k--)
+                    for (int k = numberGroups.Count - 1; k >= 0; k--)
                     {
-                        if ((numberGroups[k] % numberGroups[j] < 1 || numberGroups[j] % numberGroups[k] < 1) && k != j)
+                        if ((numberGroups[j] % numberGroups[k] < 1) && k != j)
                         {
                             if (max == 0)
                             {
                                 max = numberGroups[k] > numberGroups[j] ? numberGroups[k] : numberGroups[j];
                                 min = numberGroups[k] < numberGroups[j] ? numberGroups[k] : numberGroups[j];
+                                checkSums.Add(max / min);
                             }
                         }
                     }
@@ -59,10 +61,11 @@ namespace AdventofCode
                 }
                 //var max = numberGroups.Where(x => x % 2 < 1).Max();
                 //var min = numberGroups.Where(x => x % 2 < 1).Min();
-                checkSums.Add(max / min);
+                
 
             }
             var answer = checkSums.Sum(x => x);
+
         }
     }
 }
